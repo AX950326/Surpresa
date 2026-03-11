@@ -38,6 +38,11 @@
 
     <p>Um pequeno milagre está a caminho.</p>
     <p><strong>Prepara o colinho!</strong></p>
+    <p style="font-size: 0.9em; margin-top: 20px;"><em>A magia acontece em outubro de 2026 🤍</em></p>
+
+    <div class="polaroid" id="foto-ecografia">
+        <img src="ecografia.jpeg" alt="A nossa primeira ecografia">
+    </div>
 </div>
 
 <script>
@@ -87,6 +92,12 @@
     function revelarEcraFinal() {
         document.getElementById('ecra-final').classList.add('visivel');
         dispararConfetis();
+
+        // NOVA PARTE: O temporizador para a ecografia aparecer
+        // 3000 milissegundos = 3 segundos de suspense
+        setTimeout(() => {
+            document.getElementById('foto-ecografia').classList.add('mostrar');
+        }, 3000);
     }
 
     function dispararConfetis() {

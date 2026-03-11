@@ -211,3 +211,36 @@ h2 {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
 }
+
+/* Estilo da Fotografia Polaroid */
+.polaroid {
+    background: white;
+    padding: 12px 12px 35px 12px; /* Espaço maior em baixo, típico das Polaroids */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border-radius: 3px;
+    max-width: 250px;
+    width: 60vw;
+    margin-top: 25px;
+
+    /* Posição inicial: transparente e ligeiramente descaída */
+    opacity: 0;
+    transform: rotate(-4deg) translateY(30px) scale(0.9);
+    transition: all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); /* Animação super suave */
+    pointer-events: none;
+}
+
+.polaroid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+    /* Deixa a imagem ligeiramente a preto e branco/sépia para um tom mais vintage e fofinho (opcional) */
+    filter: sepia(0.3) contrast(1.1);
+}
+
+/* Classe que o JavaScript vai adicionar ao fim de 3 segundos */
+.polaroid.mostrar {
+    opacity: 1;
+    transform: rotate(-4deg) translateY(0) scale(1);
+    pointer-events: all;
+}
