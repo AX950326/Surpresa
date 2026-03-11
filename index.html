@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>O Oráculo de 2026</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -24,11 +24,18 @@
     </div>
 </div>
 
-<div class="instrucao" id="instrucao-toque">Toca no vidro 👆</div>
+<div class="instrucao" id="instrucao-toque">Toca no vidro</div>
 
 <div class="ecra-final" id="ecra-final">
     <h1>Promovida a Titia!</h1>
-    <div style="font-size: 3em; margin: 20px 0; letter-spacing: 15px;">🤍🧸🍼👣</div>
+
+    <div class="simbolos-magicos">
+        <span>🤍</span>
+        <span>🧸</span>
+        <span>🍼</span>
+        <span>👣</span>
+    </div>
+
     <p>Um pequeno milagre está a caminho.</p>
     <p><strong>Prepara o colinho!</strong></p>
 </div>
@@ -67,14 +74,14 @@
                 document.getElementById('titulo').style.opacity = 0;
                 instrucaoToque.style.opacity = 0;
 
-                // Passados 2.5 segundos de luz intensa, muda para o ecrã final claro e dispara confetis
+                // Passados 2.5 segundos de luz intensa, muda para o ecrã final
                 setTimeout(revelarEcraFinal, 2500);
             }
 
             // Traz o novo texto de volta
             textoPrevisao.style.opacity = 1;
             textoPrevisao.style.transform = "scale(1)";
-        }, 800); // Tempo para o texto desaparecer antes de trocar
+        }, 800);
     }
 
     function revelarEcraFinal() {
