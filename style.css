@@ -1,0 +1,185 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Montserrat:wght@300;400;500&display=swap');
+
+:root {
+    --cor-fundo: #0a0510; /* Fundo escuro místico */
+    --cor-luz: #ffcf75;   /* Luz dourada mágica */
+    --cor-fumo: rgba(255, 207, 117, 0.15);
+}
+
+body {
+    background-color: var(--cor-fundo);
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    color: white;
+}
+
+h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 2em;
+    color: #e8e0d9;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    z-index: 10;
+}
+
+/* O Recipiente da Bola de Cristal */
+.container-oraculo {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: flutuar 4s ease-in-out infinite;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* A Base de Madeira/Pedra */
+.base-bola {
+    position: absolute;
+    bottom: -30px;
+    width: 200px;
+    height: 60px;
+    background: radial-gradient(ellipse at center, #2a1b15 0%, #0a0503 100%);
+    border-radius: 50%;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.8);
+    z-index: 1;
+}
+
+/* O Vidro da Bola - Efeito 3D */
+.bola-vidro {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    /* Gradiente para simular o reflexo da luz no vidro curvo */
+    background: radial-gradient(circle at 35% 25%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 20%, transparent 50%, rgba(255,207,117,0.1) 100%);
+    /* Sombras para dar volume e brilho interior/exterior */
+    box-shadow:
+            inset 0 -20px 40px rgba(255, 207, 117, 0.2),
+            inset 20px 0 40px rgba(255, 255, 255, 0.1),
+            inset -20px 0 40px rgba(0, 0, 0, 0.5),
+            0 0 50px rgba(255, 207, 117, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 5;
+    overflow: hidden; /* Mantém o fumo dentro da bola */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, box-shadow 0.5s;
+}
+
+.container-oraculo:active .bola-vidro {
+    transform: scale(0.96);
+    box-shadow: 0 0 80px rgba(255, 207, 117, 0.5);
+}
+
+/* Efeito de Fumo Mágico dentro da Bola */
+.fumo {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background:
+            radial-gradient(circle at 50% 50%, var(--cor-fumo) 0%, transparent 40%),
+            radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    filter: blur(20px);
+    opacity: 0.6;
+    animation: rodarFumo 15s linear infinite;
+    z-index: 2;
+}
+
+.fumo:nth-child(2) {
+    animation: rodarFumo 20s linear infinite reverse;
+    opacity: 0.4;
+    background: radial-gradient(circle at 70% 30%, var(--cor-fumo) 0%, transparent 50%);
+}
+
+/* O Texto a aparecer no centro */
+.texto-oraculo {
+    position: relative;
+    z-index: 10;
+    width: 80%;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4em;
+    font-style: italic;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px var(--cor-luz);
+    opacity: 1;
+    transition: opacity 1s ease-in-out, transform 1s ease;
+}
+
+.texto-grande {
+    font-size: 2.5em;
+    font-weight: 600;
+    font-style: normal;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px #fff, 0 0 40px var(--cor-luz), 0 0 60px #ff758c;
+}
+
+.instrucao {
+    margin-top: 50px;
+    font-size: 0.85em;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: piscar 2s infinite;
+}
+
+/* Animações */
+@keyframes flutuar {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes rodarFumo {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes piscar {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Ecrã final que inunda a página */
+.ecra-final {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #f9f6f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s ease-in-out;
+}
+
+.ecra-final.visivel {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.ecra-final h1 {
+    color: #c28c7e;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5em;
+    margin: 0;
+}
+
+.ecra-final p {
+    color: #4a443e;
+    font-size: 1.2em;
+}

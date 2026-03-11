@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Oráculo de 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<h2 id="titulo">O Oráculo de 2026</h2>
+
+<div class="container-oraculo" onclick="tocarOraculo()">
+    <div class="base-bola"></div>
+
+    <div class="bola-vidro" id="bola">
+        <div class="fumo"></div>
+        <div class="fumo"></div>
+
+        <div class="texto-oraculo" id="texto-previsao">
+            Toca na bola para veres o teu futuro...
+        </div>
+    </div>
+</div>
+
+<div class="instrucao" id="instrucao-toque">Toca no vidro 👆</div>
+
+<div class="ecra-final" id="ecra-final">
+    <h1>Promovida a Titia!</h1>
+    <div style="font-size: 3em; margin: 20px 0; letter-spacing: 15px;">🤍🧸🍼👣</div>
+    <p>Um pequeno milagre está a caminho.</p>
+    <p><strong>Prepara o colinho!</strong></p>
+</div>
+
+<script>
+    let toques = 0;
+    const textoPrevisao = document.getElementById('texto-previsao');
+    const bola = document.getElementById('bola');
+    const instrucaoToque = document.getElementById('instrucao-toque');
+
+    function tocarOraculo() {
+        toques++;
+
+        // Desvanece o texto atual
+        textoPrevisao.style.opacity = 0;
+        textoPrevisao.style.transform = "scale(0.8)";
+
+        setTimeout(() => {
+            if (toques === 1) {
+                textoPrevisao.innerHTML = "Vejo o teu vocabulário a mudar para vozinhas finas e palavras no diminutivo...";
+                bola.style.boxShadow = "inset 0 -20px 40px rgba(255, 117, 140, 0.3), 0 0 60px rgba(255, 117, 140, 0.3)";
+            }
+            else if (toques === 2) {
+                textoPrevisao.innerHTML = "Vejo-te a fazer caretas e sons estranhos em público sem qualquer vergonha...";
+                bola.style.boxShadow = "inset 0 -20px 40px rgba(255, 255, 255, 0.5), 0 0 80px rgba(255, 255, 255, 0.5)";
+            }
+            else if (toques === 3) {
+                // A Grande Revelação dentro da bola!
+                textoPrevisao.classList.add("texto-grande");
+                textoPrevisao.innerHTML = "FOSTE PROMOVIDA A TITIA!";
+
+                // A bola brilha intensamente
+                bola.style.background = "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,207,117,1) 50%)";
+                bola.style.boxShadow = "0 0 200px rgba(255, 255, 255, 1)";
+
+                document.getElementById('titulo').style.opacity = 0;
+                instrucaoToque.style.opacity = 0;
+
+                // Passados 2.5 segundos de luz intensa, muda para o ecrã final claro e dispara confetis
+                setTimeout(revelarEcraFinal, 2500);
+            }
+
+            // Traz o novo texto de volta
+            textoPrevisao.style.opacity = 1;
+            textoPrevisao.style.transform = "scale(1)";
+        }, 800); // Tempo para o texto desaparecer antes de trocar
+    }
+
+    function revelarEcraFinal() {
+        document.getElementById('ecra-final').classList.add('visivel');
+        dispararConfetis();
+    }
+
+    function dispararConfetis() {
+        var duration = 4 * 1000;
+        var end = Date.now() + duration;
+
+        (function frame() {
+            confetti({
+                particleCount: 5, angle: 60, spread: 55, origin: { x: 0 },
+                colors: ['#c28c7e', '#f9f6f0', '#ffcf75']
+            });
+            confetti({
+                particleCount: 5, angle: 120, spread: 55, origin: { x: 1 },
+                colors: ['#c28c7e', '#f9f6f0', '#ffcf75']
+            });
+            if (Date.now() < end) requestAnimationFrame(frame);
+        }());
+    }
+</script>
+</body>
+</html>
